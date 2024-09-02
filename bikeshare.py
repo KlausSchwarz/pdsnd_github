@@ -41,6 +41,7 @@ def get_filters():
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
+    Note: diff in structure of the csv files
 
     Args:
         (str) city - name of the city to analyze
@@ -73,12 +74,18 @@ def load_data(city, month, day):
         df = df.loc[df['day_of_week'].str.lower() == day]
     return df
 
+def start(txt):
+    print('\n{}\n'.format(txt))
+    return time.time()
+
+def finish(start_time):
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
+
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
-
-    print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time()
+    start_time = start("Calculating the Most Frequent Times of Travel...")
 
     # Display the most common month
     mcv_month = df['month'].mode()
@@ -94,15 +101,11 @@ def time_stats(df):
     mcv_hour = df['hour'].mode()
     print("most common hour: {}".format(mcv_hour.tolist()[0]))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
-
-    print('\nCalculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
+    start_time = start("Calculating the Most Popular Stations and Trip...")
 
     mcv_start_station = df["Start Station"].mode()
     print("most common Start Station: {}".format(mcv_start_station.tolist()[0]))
@@ -114,15 +117,11 @@ def station_stats(df):
     mcv_combination = df.groupby(["Start Station", "End Station"]).size().idxmax()
     print("most common combination of Start and End Station: {}".format(mcv_combination))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
-
-    print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
+    start_time = start("Calculating Trip Duration...")
 
     # Display the total trips duration
     total_duration = df["Trip Duration"].sum()
@@ -132,15 +131,11 @@ def trip_duration_stats(df):
     mean_duration = df["Trip Duration"].mean()
     print("Mean Trip Duration: {:.2f}".format(mean_duration))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""
-
-    print('\nCalculating User Stats...\n')
-    start_time = time.time()
+    start_time = start("Calculating User Stats...")
 
     # Display user type counts
     user_type_counts = df["User Type"].value_counts()
@@ -164,9 +159,8 @@ def user_stats(df):
     most_common_year = int(df['Birth Year'].mode().iloc[0])
     print("Most common year: {}".format(most_common_year))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
+    
 def descriptive_statistics(df, city):
     """Displays descriptive statistics on bikeshare users."""
 
