@@ -7,7 +7,8 @@
 Bike Share / Git Project
 
 ### Description
-Demonstrate the capabilities of working w/ Git on the example of the previous bike share Python code
+Demonstrate the capabilities of working w/ Git on the example of the previous bike share Python code.
+First additional change (here to readme.md)
 
 ### Files used
 bikeshare.py
