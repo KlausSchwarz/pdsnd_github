@@ -77,6 +77,11 @@ def start(txt):
     print('\n{}\n'.format(txt))
     return time.time()
 
+def finish(start_time):
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
+
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
     start_time = start("Calculating the Most Frequent Times of Travel...")
@@ -95,9 +100,7 @@ def time_stats(df):
     mcv_hour = df['hour'].mode()
     print("most common hour: {}".format(mcv_hour.tolist()[0]))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
@@ -113,9 +116,7 @@ def station_stats(df):
     mcv_combination = df.groupby(["Start Station", "End Station"]).size().idxmax()
     print("most common combination of Start and End Station: {}".format(mcv_combination))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
@@ -129,8 +130,7 @@ def trip_duration_stats(df):
     mean_duration = df["Trip Duration"].mean()
     print("Mean Trip Duration: {:.2f}".format(mean_duration))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    finish(start_time)
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""
@@ -158,9 +158,8 @@ def user_stats(df):
     most_common_year = int(df['Birth Year'].mode().iloc[0])
     print("Most common year: {}".format(most_common_year))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
+    finish(start_time)
+    
 def descriptive_statistics(df, city):
     """Displays descriptive statistics on bikeshare users."""
 
