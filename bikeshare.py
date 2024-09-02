@@ -41,6 +41,7 @@ def get_filters():
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
+    Note: diff in structure of the csv files
 
     Args:
         (str) city - name of the city to analyze
